@@ -1,0 +1,18 @@
+{
+  "id": "kybernesis.attio",
+  "name": "Attio deals",
+  "apiVersion": 1,
+  "description": "Your Attio deals inside Buzz: the client's deal on every client channel, the whole pipeline on one page, save any message to Attio, and Attio tools for your agents.",
+  "discovery": { "category": "agent-tools", "tags": ["CRM", "Attio", "Deals", "Sales"] },
+  "host": {
+    "networkOrigins": ["https://api.attio.com"],
+    "commands": [
+      {
+        "id": "attio-key",
+        "program": "security",
+        "args": ["find-generic-password", "-s", "kybernesis-attio-api-key", "-w"],
+        "maxOutputBytes": 4096
+      }
+    ]
+  }
+}
