@@ -126,11 +126,10 @@ export function apply(ctx) {
   }
 
   async function queryDeals(filter, limit) {
-    const r = await attio("/objects/deals/records/query", "POST", {
-      filter: filter || {},
-      sorts: [{ attribute: "name", direction: "asc" }],
-      limit: limit || 500,
-    });
+    // Attio returns no rows for an empty filter object, so leave it out when there's nothing to filter on.
+    const body = { sorts: [{ attribute: "name", direction: "asc" }], limit: limit || 500 };
+    if (filter && Object.keys(filter).length) body.filter = filter;
+    const r = await attio("/objects/deals/records/query", "POST", body);
     return (r.data || []).map(summarize);
   }
   async function getDeal(id) {
